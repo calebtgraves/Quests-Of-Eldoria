@@ -7,7 +7,7 @@
 {/if}
 <div id="joined-players">
     {#each $connectedPlayers as player}
-    <CharacterIcon characterInfo={player}/>
+    <CharacterIcon characterInfo={player.characterInfo}/>
     {/each}
 </div>
 <style>

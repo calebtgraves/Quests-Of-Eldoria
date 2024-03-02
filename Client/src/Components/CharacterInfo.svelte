@@ -1,5 +1,5 @@
 <script>
-    import { currentPage, selectedCharacter, vip } from "../stores.mjs";
+    import { baddieNames, currentPage, myTurn, selectedCharacter, vip } from "../stores.mjs";
     import { socket } from "../stores.mjs";
 
     let questId = ""
@@ -17,6 +17,23 @@
         $socket.on('invalidCode',()=>{
             console.log("Code invalid");
             questId = ""
+        })
+        $socket.on('beginGame',(numBaddies)=>{
+            console.log("Game Started")
+            let baddies = []
+            for(let i = 1; i<=numBaddies;i++){
+                baddies.push(`Goblin ${i}`)
+            }
+            console.log(baddies)
+            baddieNames.set(baddies)
+            currentPage.set("game-play-page");
+        })
+        $socket.on('nextTurn',(person)=>{
+            if(person == $selectedCharacter.name){
+                myTurn.set(true);
+            }else{
+                myTurn.set(false);
+            }
         })
     }
 </script>

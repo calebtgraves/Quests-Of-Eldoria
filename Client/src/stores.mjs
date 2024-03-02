@@ -6,5 +6,8 @@ export const allCharacters = writable([]);
 export const selectedCharacter = writable({
     name:"",
     characterClass:"",
+    items:{}
 });
 export const vip = writable(false);
+export const baddieNames = writable([]);
+export const myTurn = writable(false);

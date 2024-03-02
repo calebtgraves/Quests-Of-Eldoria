@@ -5,6 +5,7 @@
     import CharacterCreator from "./Components/CharacterCreator.svelte";
     import CharacterInfo from "./Components/CharacterInfo.svelte";
     import WaitingRoom from "./Components/WaitingRoom.svelte";
+    import GamePlay from "./Components/GamePlay.svelte";
     
     let pages = []
     $: $currentPage, switchView()
@@ -32,6 +33,9 @@ onMount(()=>{
     </div>
     <div id="waiting-room-page" class="page" bind:this={pages[3]}>
         <WaitingRoom/>
+    </div>
+    <div id="game-play-page" class="page" bind:this={pages[4]}>
+        <GamePlay/>
     </div>
 </main>
 <style>

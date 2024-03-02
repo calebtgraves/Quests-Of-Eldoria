@@ -1,12 +1,12 @@
 <script>
-    import { vip } from "../stores.mjs";
-
-
+    import { vip, currentPage, socket } from "../stores.mjs";
 </script>
 <div id="waiting-room">
     <h1>You're In! See your name on the screen?</h1>
     {#if $vip}
-    <button>Start Game</button>
+    <button on:click={()=>{
+        $socket.emit("gameStarted",$socket.id)
+    }}>Start Game</button>
     {/if}
 </div>
 <style>

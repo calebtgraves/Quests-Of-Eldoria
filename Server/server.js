@@ -58,6 +58,24 @@ io.on("connection", socket=> {
             io.to(socketInfo[0]).emit('invalidCode');
         }
     })
+    socket.on('gameStarted',(socketId)=>{
+        let gameHost = users[socketId].host
+        io.to(gameHost.socketId).emit("beginGame");
+        gameHost.connectedUsers.forEach((player)=>{
+            io.to(player).emit("beginGame",gameHost.connectedUsers.length);
+        })
+    })
+    socket.on('doDamage',(socketId, itemInfo,target,type)=>{
+        let gameHost = users[socketId].host
+        io.to(gameHost.socketId).emit("doDamage",itemInfo,target,type);
+    })
+    socket.on("nextTurn",(person,host,personType)=>{
+        let gameHost = hosts[host]
+        io.to(gameHost.socketId).emit("nextTurn",personType)
+        gameHost.connectedUsers.forEach((player)=>{
+            io.to(player).emit("nextTurn",person)
+        })
+    })
 })
 
 httpServer.listen(3000, () => console.log('listening on port 3000'))
